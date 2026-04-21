@@ -1,14 +1,15 @@
-import express from 'express'
+import express, { Express, Request, Response, NextFunction } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import participantsRouter from './routes/participants.js'
-import prizesRouter from './routes/prizes.js'
-import lotteryRouter from './routes/lottery.js'
-import wechatRouter from './routes/wechat.js'
+import participantsRouter from './routes/participants'
+import prizesRouter from './routes/prizes'
+import lotteryRouter from './routes/lottery'
+import wechatRouter from './routes/wechat'
+import type { ApiResponse } from './types'
 
 dotenv.config()
 
-const app = express()
+const app: Express = express()
 const PORT = process.env.PORT || 8080
 
 // 中间件
@@ -23,12 +24,12 @@ app.use('/api/lottery', lotteryRouter)
 app.use('/api/wechat', wechatRouter)
 
 // 健康检查
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response<ApiResponse>) => {
   res.json({ success: true, message: 'Server is running' })
 })
 
 // 错误处理
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response<ApiResponse>, next: NextFunction) => {
   console.error('Error:', err)
   res.status(500).json({ success: false, message: err.message || 'Internal server error' })
 })
