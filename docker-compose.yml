@@ -41,7 +41,7 @@ services:
   # 后端服务
   backend:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     container_name: lucky-draw-backend
     restart: always
@@ -54,9 +54,9 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
       MYSQL_DATABASE: lucky_draw
       REDIS_URL: redis://redis:6379
-      WECHAT_APPID: ${WECHAT_APPID}
-      WECHAT_APPSECRET: ${WECHAT_APPSECRET}
-      WECHAT_CALLBACK_URL: ${WECHAT_CALLBACK_URL}
+      WECHAT_APPID: ${WECHAT_APPID:-}
+      WECHAT_APPSECRET: ${WECHAT_APPSECRET:-}
+      WECHAT_CALLBACK_URL: ${WECHAT_CALLBACK_URL:-}
     ports:
       - "8080:8080"
     depends_on:
@@ -64,18 +64,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-
-  # 前端服务
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: lucky-draw-frontend
-    restart: always
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
 
 volumes:
   mysql_data:

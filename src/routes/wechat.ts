@@ -2,13 +2,23 @@ import { Router, Request, Response } from 'express'
 import { v4 as uuidv4 } from 'uuid'
 import QRCode from 'qrcode'
 import axios from 'axios'
-import { getClient } from '../config/redis'
-import { query } from '../config/database'
-import type { ApiResponse, CheckinRequest, QRCodeData } from '../types'
-import type { ParticipantRow, WechatQRStatus } from '../types/models'
+import { getClient } from '../config/redis.js'
+import { query } from '../config/database.js'
+import type { ApiResponse, CheckinRequest, QRCodeData } from '../types/index.js'
+import type { WechatQRStatus } from '../types/models.js'
 import type { RedisClientType } from 'redis'
 
 const router = Router()
+
+interface ParticipantRow {
+  id: number
+  name: string
+  phone: string | null
+  openid: string | null
+  avatar: string | null
+  status: 'pending' | 'joined' | 'won'
+  created_at: Date
+}
 
 const WECHAT_APPID = process.env.WECHAT_APPID || 'wx22a171f2ccde86a8'
 const WECHAT_APPSECRET = process.env.WECHAT_APPSECRET || 'd6049cb54fa1a1e921a46fc60019361b'

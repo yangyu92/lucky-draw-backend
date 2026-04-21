@@ -1,11 +1,11 @@
 import express, { Express, Request, Response, NextFunction } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import participantsRouter from './routes/participants'
-import prizesRouter from './routes/prizes'
-import lotteryRouter from './routes/lottery'
-import wechatRouter from './routes/wechat'
-import type { ApiResponse } from './types'
+import participantsRouter from './routes/participants.js'
+import prizesRouter from './routes/prizes.js'
+import lotteryRouter from './routes/lottery.js'
+import wechatRouter from './routes/wechat.js'
+import type { ApiResponse } from './types/index.js'
 
 dotenv.config()
 

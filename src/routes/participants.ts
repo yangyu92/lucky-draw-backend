@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express'
-import { query } from '../config/database'
-import type { ApiResponse, CreateParticipantDto, UpdateParticipantDto } from '../types'
-import type { Participant, ParticipantRow } from '../types/models'
+import { query } from '../config/database.js'
+import type { ApiResponse, CreateParticipantDto, UpdateParticipantDto } from '../types/index.js'
+import type { Participant } from '../types/models.js'
 
 const router = Router()
 

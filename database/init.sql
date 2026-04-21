@@ -1,9 +1,4 @@
--- 初始化数据库
-CREATE DATABASE IF NOT EXISTS lucky_draw DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE lucky_draw;
-
--- 执行schema.sql
-SOURCE schema.sql;
 
 -- 插入示例奖品数据
 INSERT INTO prizes (name, level, quantity, remaining, image_url) VALUES

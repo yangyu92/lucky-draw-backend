@@ -1,9 +1,29 @@
 import { Router, Request, Response } from 'express'
-import { query } from '../config/database'
-import type { ApiResponse, DrawRequest, DrawResult } from '../types'
-import type { WinnerRow, ParticipantRow, PrizeRow } from '../types/models'
+import { query } from '../config/database.js'
+import type { ApiResponse, DrawRequest, DrawResult } from '../types/index.js'
+import type { WinnerWithDetails as WinnerWithDetailsModel } from '../types/models.js'
 
 const router = Router()
+
+interface ParticipantRow {
+  id: number
+  name: string
+  phone: string | null
+  openid: string | null
+  avatar: string | null
+  status: 'pending' | 'joined' | 'won'
+  created_at: Date
+}
+
+interface PrizeRow {
+  id: number
+  name: string
+  level: string
+  quantity: number
+  remaining: number
+  image_url: string | null
+  created_at: Date
+}
 
 interface WinnerRow {
   id: number
